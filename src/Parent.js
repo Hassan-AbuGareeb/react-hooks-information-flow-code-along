@@ -3,13 +3,29 @@ import { getRandomColor } from "./randomColorGenerator.js";
 import Child from "./Child";
 
 function Parent() {
-  const randomColor = getRandomColor();
-  const [color, setColor] = useState(randomColor);
+  const [color, setColor] = useState(getRandomColor());
+  const [childColor, setChildColor] = useState(getRandomColor());
+  function handleChangeColor() {
+    const newColor = getRandomColor();
+    setColor(newColor);
+  }
 
+  function handleChildChangeColor() {
+    const newColor = getRandomColor();
+    setChildColor(newColor);
+  }
   return (
     <div className="parent" style={{ backgroundColor: color }}>
-      <Child />
-      <Child />
+      <Child
+        onChangeColor={handleChangeColor}
+        childColor={childColor}
+        onChildChangeColor={handleChildChangeColor}
+      />
+      <Child
+        onChangeColor={handleChangeColor}
+        childColor={childColor}
+        onChildChangeColor={handleChildChangeColor}
+      />
     </div>
   );
 }
